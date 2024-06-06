@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ProjetoModelo
 {
@@ -85,7 +86,15 @@ namespace ProjetoModelo
                 return estado;
                 //return new AcessoBD().Consultar(sql, new List<SqlParameter>().Add(new SqlParameter("@Id", cidadeId)));
             }
-            catch (Exception ex) { throw new Exception(); }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+        public static bool SomenteNumeros(char tecla, string texto)
+        {
+            if ((!char.IsDigit(tecla) && tecla != (char)Keys.Back))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

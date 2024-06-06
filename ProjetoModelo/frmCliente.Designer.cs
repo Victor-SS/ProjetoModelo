@@ -37,6 +37,7 @@
             this.grpDados = new System.Windows.Forms.GroupBox();
             this.grdDados = new System.Windows.Forms.DataGridView();
             this.grpCliente = new System.Windows.Forms.GroupBox();
+            this.cboCidade = new System.Windows.Forms.ComboBox();
             this.cboEstado = new System.Windows.Forms.ComboBox();
             this.txtCEP = new System.Windows.Forms.TextBox();
             this.txtNumero = new System.Windows.Forms.TextBox();
@@ -66,7 +67,6 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnGravar = new System.Windows.Forms.Button();
-            this.cboCidade = new System.Windows.Forms.ComboBox();
             this.grpPesquisa.SuspendLayout();
             this.grpDados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdDados)).BeginInit();
@@ -186,6 +186,14 @@
             this.grpCliente.TabStop = false;
             this.grpCliente.Text = "Dados para Cadastro";
             // 
+            // cboCidade
+            // 
+            this.cboCidade.FormattingEnabled = true;
+            this.cboCidade.Location = new System.Drawing.Point(54, 152);
+            this.cboCidade.Name = "cboCidade";
+            this.cboCidade.Size = new System.Drawing.Size(203, 21);
+            this.cboCidade.TabIndex = 20;
+            // 
             // cboEstado
             // 
             this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -202,6 +210,7 @@
             this.txtCEP.Name = "txtCEP";
             this.txtCEP.Size = new System.Drawing.Size(142, 20);
             this.txtCEP.TabIndex = 8;
+            this.txtCEP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCEP_KeyPress);
             // 
             // txtNumero
             // 
@@ -339,6 +348,7 @@
             this.txtCPF.Name = "txtCPF";
             this.txtCPF.Size = new System.Drawing.Size(202, 20);
             this.txtCPF.TabIndex = 2;
+            this.txtCPF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCPF_KeyPress);
             // 
             // lblDataNascimento
             // 
@@ -445,14 +455,6 @@
             this.btnGravar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGravar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnGravar.UseVisualStyleBackColor = true;
-            // 
-            // cboCidade
-            // 
-            this.cboCidade.FormattingEnabled = true;
-            this.cboCidade.Location = new System.Drawing.Point(54, 152);
-            this.cboCidade.Name = "cboCidade";
-            this.cboCidade.Size = new System.Drawing.Size(203, 21);
-            this.cboCidade.TabIndex = 20;
             // 
             // frmCliente
             // 

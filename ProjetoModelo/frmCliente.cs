@@ -52,17 +52,23 @@ namespace ProjetoModelo
                 MessageBox.Show("Erro-->" + ex.Message, "Erro",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-        
+        }        
         private void frmCliente_Load(object sender, EventArgs e)
         {
             CarregarEstados();
             load = true;
         }
-
         private void cboEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
             CarregarCidades();
+        }
+        private void txtCPF_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Global.SomenteNumeros(e.KeyChar, (sender as TextBox).Text); //sender as textbox == sender é um textbox
+        }
+        private void txtCEP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Global.SomenteNumeros(e.KeyChar, (sender as TextBox).Text);
         }
     }
 }
