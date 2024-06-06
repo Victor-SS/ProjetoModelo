@@ -48,7 +48,6 @@
             this.lblEstado = new System.Windows.Forms.Label();
             this.lblCelular = new System.Windows.Forms.Label();
             this.txtCelular = new System.Windows.Forms.TextBox();
-            this.txtCidade = new System.Windows.Forms.TextBox();
             this.txtBairro = new System.Windows.Forms.TextBox();
             this.txtComplemento = new System.Windows.Forms.TextBox();
             this.lblNumero = new System.Windows.Forms.Label();
@@ -67,6 +66,7 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnGravar = new System.Windows.Forms.Button();
+            this.cboCidade = new System.Windows.Forms.ComboBox();
             this.grpPesquisa.SuspendLayout();
             this.grpDados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdDados)).BeginInit();
@@ -93,7 +93,7 @@
             this.rdbCPF.Location = new System.Drawing.Point(592, 27);
             this.rdbCPF.Name = "rdbCPF";
             this.rdbCPF.Size = new System.Drawing.Size(45, 17);
-            this.rdbCPF.TabIndex = 3;
+            this.rdbCPF.TabIndex = 2;
             this.rdbCPF.Text = "CPF";
             this.rdbCPF.UseVisualStyleBackColor = true;
             // 
@@ -104,7 +104,7 @@
             this.rdbNome.Location = new System.Drawing.Point(524, 27);
             this.rdbNome.Name = "rdbNome";
             this.rdbNome.Size = new System.Drawing.Size(53, 17);
-            this.rdbNome.TabIndex = 2;
+            this.rdbNome.TabIndex = 1;
             this.rdbNome.TabStop = true;
             this.rdbNome.Text = "Nome";
             this.rdbNome.UseVisualStyleBackColor = true;
@@ -114,7 +114,7 @@
             this.txtPesquisa.Location = new System.Drawing.Point(65, 24);
             this.txtPesquisa.Name = "txtPesquisa";
             this.txtPesquisa.Size = new System.Drawing.Size(439, 20);
-            this.txtPesquisa.TabIndex = 1;
+            this.txtPesquisa.TabIndex = 0;
             // 
             // lblPesquisa
             // 
@@ -154,6 +154,7 @@
             // 
             // grpCliente
             // 
+            this.grpCliente.Controls.Add(this.cboCidade);
             this.grpCliente.Controls.Add(this.cboEstado);
             this.grpCliente.Controls.Add(this.txtCEP);
             this.grpCliente.Controls.Add(this.txtNumero);
@@ -163,7 +164,6 @@
             this.grpCliente.Controls.Add(this.lblEstado);
             this.grpCliente.Controls.Add(this.lblCelular);
             this.grpCliente.Controls.Add(this.txtCelular);
-            this.grpCliente.Controls.Add(this.txtCidade);
             this.grpCliente.Controls.Add(this.txtBairro);
             this.grpCliente.Controls.Add(this.txtComplemento);
             this.grpCliente.Controls.Add(this.lblNumero);
@@ -193,21 +193,22 @@
             this.cboEstado.Location = new System.Drawing.Point(309, 152);
             this.cboEstado.Name = "cboEstado";
             this.cboEstado.Size = new System.Drawing.Size(40, 21);
-            this.cboEstado.TabIndex = 23;
+            this.cboEstado.TabIndex = 10;
+            this.cboEstado.SelectedIndexChanged += new System.EventHandler(this.cboEstado_SelectedIndexChanged);
             // 
             // txtCEP
             // 
             this.txtCEP.Location = new System.Drawing.Point(387, 125);
             this.txtCEP.Name = "txtCEP";
             this.txtCEP.Size = new System.Drawing.Size(142, 20);
-            this.txtCEP.TabIndex = 22;
+            this.txtCEP.TabIndex = 8;
             // 
             // txtNumero
             // 
             this.txtNumero.Location = new System.Drawing.Point(592, 73);
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(57, 20);
-            this.txtNumero.TabIndex = 21;
+            this.txtNumero.TabIndex = 5;
             // 
             // dtoDataNascimento
             // 
@@ -215,8 +216,8 @@
             this.dtoDataNascimento.Location = new System.Drawing.Point(565, 22);
             this.dtoDataNascimento.Name = "dtoDataNascimento";
             this.dtoDataNascimento.Size = new System.Drawing.Size(84, 20);
-            this.dtoDataNascimento.TabIndex = 20;
-            this.dtoDataNascimento.Value = new System.DateTime(2024, 6, 5, 20, 8, 6, 0);
+            this.dtoDataNascimento.TabIndex = 1;
+            this.dtoDataNascimento.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             // 
             // grpSexo
             // 
@@ -235,7 +236,7 @@
             this.rdbFeminino.Location = new System.Drawing.Point(6, 42);
             this.rdbFeminino.Name = "rdbFeminino";
             this.rdbFeminino.Size = new System.Drawing.Size(67, 17);
-            this.rdbFeminino.TabIndex = 5;
+            this.rdbFeminino.TabIndex = 1;
             this.rdbFeminino.Text = "Feminino";
             this.rdbFeminino.UseVisualStyleBackColor = true;
             // 
@@ -246,7 +247,7 @@
             this.rdbMasculino.Location = new System.Drawing.Point(6, 19);
             this.rdbMasculino.Name = "rdbMasculino";
             this.rdbMasculino.Size = new System.Drawing.Size(73, 17);
-            this.rdbMasculino.TabIndex = 4;
+            this.rdbMasculino.TabIndex = 0;
             this.rdbMasculino.TabStop = true;
             this.rdbMasculino.Text = "Masculino";
             this.rdbMasculino.UseVisualStyleBackColor = true;
@@ -283,28 +284,21 @@
             this.txtCelular.Location = new System.Drawing.Point(425, 151);
             this.txtCelular.Name = "txtCelular";
             this.txtCelular.Size = new System.Drawing.Size(104, 20);
-            this.txtCelular.TabIndex = 15;
-            // 
-            // txtCidade
-            // 
-            this.txtCidade.Location = new System.Drawing.Point(54, 151);
-            this.txtCidade.Name = "txtCidade";
-            this.txtCidade.Size = new System.Drawing.Size(198, 20);
-            this.txtCidade.TabIndex = 14;
+            this.txtCelular.TabIndex = 11;
             // 
             // txtBairro
             // 
             this.txtBairro.Location = new System.Drawing.Point(48, 125);
             this.txtBairro.Name = "txtBairro";
             this.txtBairro.Size = new System.Drawing.Size(301, 20);
-            this.txtBairro.TabIndex = 13;
+            this.txtBairro.TabIndex = 7;
             // 
             // txtComplemento
             // 
             this.txtComplemento.Location = new System.Drawing.Point(84, 99);
             this.txtComplemento.Name = "txtComplemento";
             this.txtComplemento.Size = new System.Drawing.Size(445, 20);
-            this.txtComplemento.TabIndex = 12;
+            this.txtComplemento.TabIndex = 6;
             // 
             // lblNumero
             // 
@@ -320,7 +314,7 @@
             this.txtEndereco.Location = new System.Drawing.Point(65, 73);
             this.txtEndereco.Name = "txtEndereco";
             this.txtEndereco.Size = new System.Drawing.Size(464, 20);
-            this.txtEndereco.TabIndex = 10;
+            this.txtEndereco.TabIndex = 4;
             // 
             // lblEmail
             // 
@@ -336,14 +330,15 @@
             this.txtEmail.Location = new System.Drawing.Point(309, 47);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(340, 20);
-            this.txtEmail.TabIndex = 8;
+            this.txtEmail.TabIndex = 3;
             // 
             // txtCPF
             // 
             this.txtCPF.Location = new System.Drawing.Point(50, 47);
+            this.txtCPF.MaxLength = 11;
             this.txtCPF.Name = "txtCPF";
             this.txtCPF.Size = new System.Drawing.Size(202, 20);
-            this.txtCPF.TabIndex = 7;
+            this.txtCPF.TabIndex = 2;
             // 
             // lblDataNascimento
             // 
@@ -359,7 +354,7 @@
             this.txtNome.Location = new System.Drawing.Point(48, 21);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(414, 20);
-            this.txtNome.TabIndex = 4;
+            this.txtNome.TabIndex = 0;
             // 
             // lblCidade
             // 
@@ -421,7 +416,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(13, 444);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(122, 41);
-            this.btnCancelar.TabIndex = 3;
+            this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "&Cancelar";
             this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -433,7 +428,7 @@
             this.btnLimpar.Location = new System.Drawing.Point(275, 444);
             this.btnLimpar.Name = "btnLimpar";
             this.btnLimpar.Size = new System.Drawing.Size(121, 41);
-            this.btnLimpar.TabIndex = 4;
+            this.btnLimpar.TabIndex = 5;
             this.btnLimpar.Text = "&Limpar";
             this.btnLimpar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLimpar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -445,11 +440,19 @@
             this.btnGravar.Location = new System.Drawing.Point(545, 444);
             this.btnGravar.Name = "btnGravar";
             this.btnGravar.Size = new System.Drawing.Size(121, 41);
-            this.btnGravar.TabIndex = 5;
+            this.btnGravar.TabIndex = 3;
             this.btnGravar.Text = "&Gravar";
             this.btnGravar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGravar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnGravar.UseVisualStyleBackColor = true;
+            // 
+            // cboCidade
+            // 
+            this.cboCidade.FormattingEnabled = true;
+            this.cboCidade.Location = new System.Drawing.Point(54, 152);
+            this.cboCidade.Name = "cboCidade";
+            this.cboCidade.Size = new System.Drawing.Size(203, 21);
+            this.cboCidade.TabIndex = 20;
             // 
             // frmCliente
             // 
@@ -467,6 +470,7 @@
             this.MinimizeBox = false;
             this.Name = "frmCliente";
             this.Text = "Projeto Modelo - Cadastro de Clientes";
+            this.Load += new System.EventHandler(this.frmCliente_Load);
             this.grpPesquisa.ResumeLayout(false);
             this.grpPesquisa.PerformLayout();
             this.grpDados.ResumeLayout(false);
@@ -500,7 +504,6 @@
         private System.Windows.Forms.Label lblEstado;
         private System.Windows.Forms.Label lblCelular;
         private System.Windows.Forms.TextBox txtCelular;
-        private System.Windows.Forms.TextBox txtCidade;
         private System.Windows.Forms.TextBox txtBairro;
         private System.Windows.Forms.TextBox txtComplemento;
         private System.Windows.Forms.Label lblNumero;
@@ -519,5 +522,6 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnLimpar;
         private System.Windows.Forms.Button btnGravar;
+        private System.Windows.Forms.ComboBox cboCidade;
     }
 }
