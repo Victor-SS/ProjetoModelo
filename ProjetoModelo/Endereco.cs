@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Runtime.ConstrainedExecution;
 
 namespace ProjetoModelo
 {
@@ -36,5 +38,80 @@ namespace ProjetoModelo
         DataTable dt = new DataTable();
         List<SqlParameter> parameters = new List<SqlParameter>();
         string sql = string.Empty;
+        public void Consultar()
+        {
+            try
+            {
+                parameters.Clear();
+                sql = "select id, endereco, numero, complemento, \n";
+                sql += "bairro, CEP, cidadeId, usuarioId \n";
+                sql += "from tblEndereco \n";
+                sql += "where clienteId = @clienteId";
+                parameters.Add(new SqlParameter("@clienteId", ClienteId));
+
+                dt = acesso.Consultar(sql, parameters);
+
+                if (dt.Rows.Count > 0)
+                {
+                    Id = Convert.ToInt32(dt.Rows[0]["id"]);
+                    Logradouro = dt.Rows[0]["endereco"].ToString();
+                    Numero = dt.Rows[0]["numero"].ToString();
+                    Complemento = dt.Rows[0]["complemento"].ToString();
+                    Bairro = dt.Rows[0]["bairro"].ToString();
+                    CEP = dt.Rows[0]["cep"].ToString();
+                    CidadeId = Convert.ToInt32(dt.Rows[0]["cidadeId"]);
+                    ClienteId = Convert.ToInt32(dt.Rows[0]["clienteId"]);
+                    UsuarioId = Convert.ToInt32(dt.Rows[0]["usuarioId"]);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void Gravar()
+        {
+            try
+            {
+                parameters.Clear();
+                if (Id == 0)
+                {
+                    sql = "insert into tblEndereco \n";
+                    sql += "(endereco, numero, complemento, \n";
+                    sql += "bairro, cep, cidadeId, clienteId, usuarioId)\n";
+                    sql += "values \n";
+                    sql += "(@endereco, @numero , @complemento, \n";
+                    sql += "@bairro, @CEP, @cidadeId, @clienteId , @usuarioId);\n";
+                }
+                else
+                {
+                    sql = " update tblEndereco \n";
+                    sql += "set \n";
+                    sql += "endereco = @endereco, \n";
+                    sql += "complemento = @complemento, \n";
+                    sql += "bairro = @bairro, \n";
+                    sql += "CEP = @CEP, \n";
+                    sql += "cidadeId = @cidadeId, \n";
+                    sql += "clienteId = @clienteId, \n";
+                    sql += "usuarioId = @usuarioId \n";
+                    sql += "where id = @id \n";
+                    parameters.Add(new SqlParameter("@id", Id));
+                }
+
+                parameters.Add(new SqlParameter("@endereco", Logradouro));
+                parameters.Add(new SqlParameter("@complemento", Complemento));
+                parameters.Add(new SqlParameter("@bairro", Bairro));
+                parameters.Add(new SqlParameter("@CEP", CEP));
+                parameters.Add(new SqlParameter("@cidadeId", CidadeId));
+                parameters.Add(new SqlParameter("@clienteId", ClienteId));
+                parameters.Add(new SqlParameter("@usuarioId", UsuarioId));
+                acesso.Executar(sql, parameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

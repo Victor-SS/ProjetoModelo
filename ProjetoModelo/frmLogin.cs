@@ -56,7 +56,7 @@ namespace ProjetoModelo
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Eroo --> " + ex.Message, "Login",
+                MessageBox.Show("Erro--> " + ex.Message, "Login",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

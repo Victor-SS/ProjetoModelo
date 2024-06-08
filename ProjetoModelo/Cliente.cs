@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace ProjetoModelo
 {
@@ -16,12 +17,12 @@ namespace ProjetoModelo
         public string CPF { get; set; }
         public string Email { get; set; }
         public string Sexo { get; set; }
-        public string Celular {  get; set; }
+        public string Celular { get; set; }
         public int UsuarioId { get; set; }
         public Endereco Endereco { get; set; }
 
-        public Cliente() 
-        { 
+        public Cliente()
+        {
             Id = 0;
             Nome = string.Empty;
             DataNascimento = DateTime.MinValue;
@@ -70,9 +71,68 @@ namespace ProjetoModelo
                     Email = dt.Rows[0]["email"].ToString();
                     Sexo = dt.Rows[0]["sexo"].ToString();
                     Celular = dt.Rows[0]["celular"].ToString();
-                    UsuarioId = Convert.ToInt32(dt.Rows[0]["usuarioId"]);
+                    UsuarioId = Convert.ToInt32(dt.Rows[0]["usuaioId"]);
+                    Endereco.ClienteId = Id;
+                    Endereco.Consultar();
                 }
                 return dt;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void Gravar()
+        {
+            try
+            {
+                using (TransactionScope transacao = new TransactionScope())
+                {
+                    parameters.Clear();
+                    if (Id == 0)
+                    {
+                        sql = "insert into tblCliente \n";
+                        sql += "(nome, data_nascimento, CPF, \n";
+                        sql += "email, sexo, celular, usuarioId)\n";
+                        sql += "values \n";
+                        sql += "(@nome, @data_nascimento , @CPF, \n";
+                        sql += "@email, @sexo, @celular, @usuarioId);\n";
+                        sql += "select @@IDENTITY";
+                    }
+                    else
+                    {
+                        sql = " update tblCliente \n";
+                        sql += "set \n";
+                        sql += "nome = @nome, \n";
+                        sql += "data_nascimento = @data_nascimento, \n";
+                        sql += "CPF = @CPF, \n";
+                        sql += "email = @email, \n";
+                        sql += "sexo = @sexo, \n";
+                        sql += "celular = @celular, \n";
+                        sql += "usuarioId = @usuarioId \n";
+                        sql += "where id = @id \n";
+                        parameters.Add(new SqlParameter("@id", Id));
+                    }
+
+                    parameters.Add(new SqlParameter("@nome", Nome));
+                    parameters.Add(new SqlParameter("@data_nascimento", DataNascimento));
+                    parameters.Add(new SqlParameter("@CPF", CPF));
+                    parameters.Add(new SqlParameter("@email", Email));
+                    parameters.Add(new SqlParameter("@sexo", Sexo));
+                    parameters.Add(new SqlParameter("@celular", Celular));
+                    parameters.Add(new SqlParameter("@usuarioId", UsuarioId));
+                    if (Id == 0)
+                    {
+                        Id = acesso.Executar(parameters, sql);
+                    }
+                    else
+                    {
+                        acesso.Executar(sql, parameters);
+                    }
+                    Endereco.ClienteId = Id;
+                    Endereco.Gravar();
+                    transacao.Complete();
+                }
             }
             catch (Exception ex)
             {

@@ -87,5 +87,22 @@ namespace ProjetoModelo
                 Desconectar();
             }
         }
+        public int Executar(List<SqlParameter> lista, string sqlCommand) 
+        {
+            try
+            {
+                Conectar();
+                SqlCommand command = new SqlCommand(sqlCommand, conn);
+                foreach (SqlParameter p in lista)
+                {
+                    command.Parameters.Add(p);
+                }
+                return Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

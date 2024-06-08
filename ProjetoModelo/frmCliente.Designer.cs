@@ -41,7 +41,7 @@
             this.cboEstado = new System.Windows.Forms.ComboBox();
             this.txtCEP = new System.Windows.Forms.TextBox();
             this.txtNumero = new System.Windows.Forms.TextBox();
-            this.dtoDataNascimento = new System.Windows.Forms.DateTimePicker();
+            this.dtpDataNascimento = new System.Windows.Forms.DateTimePicker();
             this.grpSexo = new System.Windows.Forms.GroupBox();
             this.rdbFeminino = new System.Windows.Forms.RadioButton();
             this.rdbMasculino = new System.Windows.Forms.RadioButton();
@@ -108,6 +108,7 @@
             this.rdbNome.TabStop = true;
             this.rdbNome.Text = "Nome";
             this.rdbNome.UseVisualStyleBackColor = true;
+            this.rdbNome.CheckedChanged += new System.EventHandler(this.rdbNome_CheckedChanged);
             // 
             // txtPesquisa
             // 
@@ -115,6 +116,8 @@
             this.txtPesquisa.Name = "txtPesquisa";
             this.txtPesquisa.Size = new System.Drawing.Size(439, 20);
             this.txtPesquisa.TabIndex = 0;
+            this.txtPesquisa.TextChanged += new System.EventHandler(this.txtPesquisa_TextChanged);
+            this.txtPesquisa.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPesquisa_KeyPress);
             // 
             // lblPesquisa
             // 
@@ -158,7 +161,7 @@
             this.grpCliente.Controls.Add(this.cboEstado);
             this.grpCliente.Controls.Add(this.txtCEP);
             this.grpCliente.Controls.Add(this.txtNumero);
-            this.grpCliente.Controls.Add(this.dtoDataNascimento);
+            this.grpCliente.Controls.Add(this.dtpDataNascimento);
             this.grpCliente.Controls.Add(this.grpSexo);
             this.grpCliente.Controls.Add(this.lblCEP);
             this.grpCliente.Controls.Add(this.lblEstado);
@@ -207,6 +210,7 @@
             // txtCEP
             // 
             this.txtCEP.Location = new System.Drawing.Point(387, 125);
+            this.txtCEP.MaxLength = 8;
             this.txtCEP.Name = "txtCEP";
             this.txtCEP.Size = new System.Drawing.Size(142, 20);
             this.txtCEP.TabIndex = 8;
@@ -219,14 +223,14 @@
             this.txtNumero.Size = new System.Drawing.Size(57, 20);
             this.txtNumero.TabIndex = 5;
             // 
-            // dtoDataNascimento
+            // dtpDataNascimento
             // 
-            this.dtoDataNascimento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtoDataNascimento.Location = new System.Drawing.Point(565, 22);
-            this.dtoDataNascimento.Name = "dtoDataNascimento";
-            this.dtoDataNascimento.Size = new System.Drawing.Size(84, 20);
-            this.dtoDataNascimento.TabIndex = 1;
-            this.dtoDataNascimento.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.dtpDataNascimento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDataNascimento.Location = new System.Drawing.Point(565, 22);
+            this.dtpDataNascimento.Name = "dtpDataNascimento";
+            this.dtpDataNascimento.Size = new System.Drawing.Size(84, 20);
+            this.dtpDataNascimento.TabIndex = 1;
+            this.dtpDataNascimento.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             // 
             // grpSexo
             // 
@@ -291,6 +295,7 @@
             // txtCelular
             // 
             this.txtCelular.Location = new System.Drawing.Point(425, 151);
+            this.txtCelular.MaxLength = 9;
             this.txtCelular.Name = "txtCelular";
             this.txtCelular.Size = new System.Drawing.Size(104, 20);
             this.txtCelular.TabIndex = 11;
@@ -431,6 +436,7 @@
             this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnLimpar
             // 
@@ -443,6 +449,7 @@
             this.btnLimpar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLimpar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // btnGravar
             // 
@@ -515,7 +522,7 @@
         private System.Windows.Forms.TextBox txtCPF;
         private System.Windows.Forms.Label lblDataNascimento;
         private System.Windows.Forms.TextBox txtNome;
-        private System.Windows.Forms.DateTimePicker dtoDataNascimento;
+        private System.Windows.Forms.DateTimePicker dtpDataNascimento;
         private System.Windows.Forms.TextBox txtNumero;
         private System.Windows.Forms.TextBox txtCEP;
         private System.Windows.Forms.ComboBox cboEstado;
