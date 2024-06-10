@@ -120,7 +120,7 @@ namespace ProjetoModelo
                     parameters.Add(new SqlParameter("@email", Email));
                     parameters.Add(new SqlParameter("@sexo", Sexo));
                     parameters.Add(new SqlParameter("@celular", Celular));
-                    parameters.Add(new SqlParameter("@usuarioId", UsuarioId));
+                    parameters.Add(new SqlParameter("@usuarioID", Global.IdUsuarioLogado));
                     if (Id == 0)
                     {
                         Id = acesso.Executar(parameters, sql);

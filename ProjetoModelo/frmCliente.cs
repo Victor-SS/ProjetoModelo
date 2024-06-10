@@ -222,6 +222,45 @@ namespace ProjetoModelo
             }
             return msgErro;
         }
+        private void PreencherFormulario()
+        {
+            try
+            {
+                txtNome.Text = cliente.Nome;
+                dtpDataNascimento.Value = cliente.DataNascimento;
+                txtCPF.Text = cliente.CPF;
+                txtEmail.Text = cliente.Email;
+                txtEndereco.Text = cliente.Endereco.Logradouro;
+                txtNumero.Text = cliente.Endereco.Numero;
+                txtComplemento.Text = cliente.Endereco.Complemento;
+                txtBairro.Text = cliente.Endereco.Bairro;
+                txtCEP.Text = cliente.Endereco.CEP;
+                txtCelular.Text = cliente.Celular;
+                rdbMasculino.Checked = cliente.Sexo == "M";
+                rdbFeminino.Checked = cliente.Sexo == "F";
+                cboEstado.SelectedValue = Global.ConsultarEstado(cliente.Endereco.CidadeId);
+                cboCidade.SelectedValue = cliente.Endereco.CidadeId;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        private void PreencherClasse()
+        {
+            cliente.Nome = txtNome.Text;
+            cliente.DataNascimento = dtpDataNascimento.Value;
+            cliente.CPF = txtCPF.Text;
+            cliente.Email = txtEmail.Text;
+            cliente.Endereco.Logradouro = txtEndereco.Text;
+            cliente.Endereco.Numero = txtNumero.Text;
+            cliente.Endereco.Bairro = txtBairro.Text;
+            cliente.Endereco.Complemento = txtComplemento.Text;
+            cliente.Endereco.CEP = txtCEP.Text;
+            cliente.Celular = txtCelular.Text;
+            cliente.Endereco.CidadeId = Convert.ToInt32(cboCidade.SelectedValue);
+            cliente.Sexo = rdbMasculino.Checked ? "M" : "F;";
+        }
         private void btnLimpar_Click(object sender, EventArgs e)
         {
             LimparCampos();
@@ -229,6 +268,45 @@ namespace ProjetoModelo
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+        private void grdDados_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                cliente = new Cliente();
+                cliente.Id = Convert.ToInt32(grdDados.SelectedRows[0].Cells[0].Value);
+                cliente.Consultar();
+                PreencherFormulario();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Erro-->" + ex.Message, "Erro",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void btnGravar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string mensagem = ValidarPreenchimento();
+                if (mensagem != string.Empty)
+                {
+                    MessageBox.Show(mensagem, "Erro de Preenchimento",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                PreencherClasse();
+                cliente.Gravar();
+                MessageBox.Show("Cliente gravado com sucesso!",
+                    "Cadastro de Cliente",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LimparCampos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro-->" + ex.Message, "Erro",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
