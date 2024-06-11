@@ -44,7 +44,7 @@ namespace ProjetoModelo
             {
                 parameters.Clear();
                 sql = "select id, endereco, numero, complemento, \n";
-                sql += "bairro, CEP, cidadeId, usuarioId \n";
+                sql += "bairro, CEP, cidadeId, clienteId, usuarioId \n";
                 sql += "from tblEndereco \n";
                 sql += "where clienteId = @clienteId";
                 parameters.Add(new SqlParameter("@clienteId", ClienteId));
@@ -90,6 +90,7 @@ namespace ProjetoModelo
                     sql += "set \n";
                     sql += "endereco = @endereco, \n";
                     sql += "complemento = @complemento, \n";
+                    sql += "numero = @numero, \n";
                     sql += "bairro = @bairro, \n";
                     sql += "CEP = @CEP, \n";
                     sql += "cidadeId = @cidadeId, \n";
@@ -102,10 +103,11 @@ namespace ProjetoModelo
                 parameters.Add(new SqlParameter("@endereco", Logradouro));
                 parameters.Add(new SqlParameter("@complemento", Complemento));
                 parameters.Add(new SqlParameter("@bairro", Bairro));
+                parameters.Add(new SqlParameter("@numero", Numero));
                 parameters.Add(new SqlParameter("@CEP", CEP));
                 parameters.Add(new SqlParameter("@cidadeId", CidadeId));
                 parameters.Add(new SqlParameter("@clienteId", ClienteId));
-                parameters.Add(new SqlParameter("@usuarioId", UsuarioId));
+                parameters.Add(new SqlParameter("@usuarioId", Global.IdUsuarioLogado));
                 acesso.Executar(sql, parameters);
             }
             catch (Exception ex)

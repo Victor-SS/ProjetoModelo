@@ -71,7 +71,7 @@ namespace ProjetoModelo
                     Email = dt.Rows[0]["email"].ToString();
                     Sexo = dt.Rows[0]["sexo"].ToString();
                     Celular = dt.Rows[0]["celular"].ToString();
-                    UsuarioId = Convert.ToInt32(dt.Rows[0]["usuaioId"]);
+                    UsuarioId = Convert.ToInt32(dt.Rows[0]["usuarioId"]);
                     Endereco.ClienteId = Id;
                     Endereco.Consultar();
                 }
@@ -120,7 +120,7 @@ namespace ProjetoModelo
                     parameters.Add(new SqlParameter("@email", Email));
                     parameters.Add(new SqlParameter("@sexo", Sexo));
                     parameters.Add(new SqlParameter("@celular", Celular));
-                    parameters.Add(new SqlParameter("@usuarioID", Global.IdUsuarioLogado));
+                    parameters.Add(new SqlParameter("@usuarioId", Global.IdUsuarioLogado));
                     if (Id == 0)
                     {
                         Id = acesso.Executar(parameters, sql);

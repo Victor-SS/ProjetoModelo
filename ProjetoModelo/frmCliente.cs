@@ -259,7 +259,7 @@ namespace ProjetoModelo
             cliente.Endereco.CEP = txtCEP.Text;
             cliente.Celular = txtCelular.Text;
             cliente.Endereco.CidadeId = Convert.ToInt32(cboCidade.SelectedValue);
-            cliente.Sexo = rdbMasculino.Checked ? "M" : "F;";
+            cliente.Sexo = rdbMasculino.Checked ? "M" : "F";
         }
         private void btnLimpar_Click(object sender, EventArgs e)
         {
@@ -301,6 +301,7 @@ namespace ProjetoModelo
                     "Cadastro de Cliente",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LimparCampos();
+                CarregarGridCliente();
             }
             catch (Exception ex)
             {
